@@ -9,3 +9,5 @@ jmvtools::create('cviJmv')
 jmvtools::addAnalysis(name='CVI', title='Content Validity Index Calculation')
 
 setwd('C:\\Users\\LerLerChan\\Documents\\GitHub\\cviJmv')
+
+jmvtools::install()

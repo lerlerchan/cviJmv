@@ -12,6 +12,43 @@ options:
     - name: dep
       title: Expert Ratings
       type: Variables
+      
+    - name: BOLD
+      title: Score
+      type: Action
+      
+      
+    - name: expertAgreement
+      title: Experts in agreement
+      type: Bool
+      default: false
+      
+    - name: UA
+      title: UA (Universal agreement)
+      type: Bool
+      default: false
+      
+    - name: iCVI
+      title: I-CVI (Item-level content validity index)
+      type: Bool
+      default: false
+      
+    - name: sCVIAve
+      title: S-CVI/Ave (Scale-level content validity index based on the average method)
+      type: Bool
+      default: false
+      
+    - name: average_prpAverage
+      title: S-CVI/PrPAve (Scale-level content validity index based on average of proportion relevance rating)
+      type: Bool
+      default: false
+      
+      
+    - name: sCVIUA
+      title: S-CVI/UA (Scale-level content validity index based on the universal agreement method)
+      type: Bool
+      default: false
+      
 
 
 #    - name: group

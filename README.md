@@ -9,6 +9,13 @@ The Content Validity Index (CVI) module is designed to assist researchers and pr
 - **S-CVI/Ave (Scale-level Content Validity Index, Average method)**: Calculates the average of I-CVIs across all items.
 - **S-CVI/UA (Scale-level Content Validity Index, Universal Agreement method)**: Measures the proportion of items that achieved universal agreement among experts.
 
+## References
+
+LK, Chan (2024) cviJMV [Jamovi Module], Retrieved from
+https://github.com/lerlerchan/cviJmv
+
+Paper link is coming soon.
+
 ## Features
 
 - **Easy Calculation**: Simplifies the calculation process for I-CVI, UA, S-CVI/Ave, and S-CVI/UA.

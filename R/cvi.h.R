@@ -6,7 +6,14 @@ CVIOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     inherit = jmvcore::Options,
     public = list(
         initialize = function(
-            dep = NULL, ...) {
+            dep = NULL,
+            BOLD = NULL,
+            expertAgreement = FALSE,
+            UA = FALSE,
+            iCVI = FALSE,
+            sCVIAve = FALSE,
+            average_prpAverage = FALSE,
+            sCVIUA = FALSE, ...) {
 
             super$initialize(
                 package="cviJmv",
@@ -17,13 +24,61 @@ CVIOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             private$..dep <- jmvcore::OptionVariables$new(
                 "dep",
                 dep)
+            private$..BOLD <- jmvcore::OptionAction$new(
+                "BOLD",
+                BOLD)
+            private$..expertAgreement <- jmvcore::OptionBool$new(
+                "expertAgreement",
+                expertAgreement,
+                default=FALSE)
+            private$..UA <- jmvcore::OptionBool$new(
+                "UA",
+                UA,
+                default=FALSE)
+            private$..iCVI <- jmvcore::OptionBool$new(
+                "iCVI",
+                iCVI,
+                default=FALSE)
+            private$..sCVIAve <- jmvcore::OptionBool$new(
+                "sCVIAve",
+                sCVIAve,
+                default=FALSE)
+            private$..average_prpAverage <- jmvcore::OptionBool$new(
+                "average_prpAverage",
+                average_prpAverage,
+                default=FALSE)
+            private$..sCVIUA <- jmvcore::OptionBool$new(
+                "sCVIUA",
+                sCVIUA,
+                default=FALSE)
 
             self$.addOption(private$..dep)
+            self$.addOption(private$..BOLD)
+            self$.addOption(private$..expertAgreement)
+            self$.addOption(private$..UA)
+            self$.addOption(private$..iCVI)
+            self$.addOption(private$..sCVIAve)
+            self$.addOption(private$..average_prpAverage)
+            self$.addOption(private$..sCVIUA)
         }),
     active = list(
-        dep = function() private$..dep$value),
+        dep = function() private$..dep$value,
+        BOLD = function() private$..BOLD$value,
+        expertAgreement = function() private$..expertAgreement$value,
+        UA = function() private$..UA$value,
+        iCVI = function() private$..iCVI$value,
+        sCVIAve = function() private$..sCVIAve$value,
+        average_prpAverage = function() private$..average_prpAverage$value,
+        sCVIUA = function() private$..sCVIUA$value),
     private = list(
-        ..dep = NA)
+        ..dep = NA,
+        ..BOLD = NA,
+        ..expertAgreement = NA,
+        ..UA = NA,
+        ..iCVI = NA,
+        ..sCVIAve = NA,
+        ..average_prpAverage = NA,
+        ..sCVIUA = NA)
 )
 
 CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -69,6 +124,13 @@ CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' 
 #' @param data .
 #' @param dep .
+#' @param BOLD .
+#' @param expertAgreement .
+#' @param UA .
+#' @param iCVI .
+#' @param sCVIAve .
+#' @param average_prpAverage .
+#' @param sCVIUA .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
@@ -77,7 +139,14 @@ CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @export
 CVI <- function(
     data,
-    dep) {
+    dep,
+    BOLD,
+    expertAgreement = FALSE,
+    UA = FALSE,
+    iCVI = FALSE,
+    sCVIAve = FALSE,
+    average_prpAverage = FALSE,
+    sCVIUA = FALSE) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("CVI requires jmvcore to be installed (restart may be required)")
@@ -90,7 +159,14 @@ CVI <- function(
 
 
     options <- CVIOptions$new(
-        dep = dep)
+        dep = dep,
+        BOLD = BOLD,
+        expertAgreement = expertAgreement,
+        UA = UA,
+        iCVI = iCVI,
+        sCVIAve = sCVIAve,
+        average_prpAverage = average_prpAverage,
+        sCVIUA = sCVIUA)
 
     analysis <- CVIClass$new(
         options = options,

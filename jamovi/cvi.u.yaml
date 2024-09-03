@@ -14,3 +14,20 @@ children:
           - type: VariablesListBox
             name: dep
             isTarget: true
+  - type: LayoutBox
+    margin: large
+    children:
+      - type: ActionButton
+        name: BOLD
+      - type: CheckBox
+        name: expertAgreement
+      - type: CheckBox
+        name: UA
+      - type: CheckBox
+        name: iCVI
+      - type: CheckBox
+        name: sCVIAve
+      - type: CheckBox
+        name: average_prpAverage
+      - type: CheckBox
+        name: sCVIUA
