@@ -1,0 +1,11 @@
+---
+name:  CVI
+title: Content Validity Index Calculation
+jrs:   '1.1'
+
+items:
+    - name:  text
+      title: Content Validity Index Calculation
+      type:  Preformatted
+
+...
