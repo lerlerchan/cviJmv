@@ -28,7 +28,15 @@ Paper link is coming soon.
 
 To install the Content Validity Index module, follow these steps:
 
-1. Open Jamovi.
+1. Open Jamovi version 2.5.6 or version 2.3.28 (solid)
+2. Download the jmo file 
+3. Navigate to the 'Modules' tab.
+4. Click on 'Sideload' tab
+5. Click on the 'Arrow logo', select the jmo file.
+6. Click 'Open' to add the module to your Jamovi environment.
+   
+### Future plan of Installation (it will take some time to be process)
+1. Open Jamovi version 2.5.6 or version 2.3.28 (solid)
 2. Navigate to the 'Modules' tab.
 3. Search for "Content Validity Index".
 4. Click 'Install' to add the module to your Jamovi environment.
