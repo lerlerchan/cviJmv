@@ -66,4 +66,14 @@ This module is licensed under the GPU License. See the LICENSE file for more inf
 
 ## Acknowledgements
 
-This module was developed by **LerLer Chan**, **Noor Fatihah** and **Khairunnisha** from Southern University College and **Dr Steven Tan** from Raffles University as part of ongoing research into content validity and measurement tools.
+This module was developed  as part of ongoing research into content validity and measurement tools.Contributors list:
+Developers:
+- LerLer Chan - Southern University College
+- Noor Fatihah Mazlam - Southern University College
+- Khairunnisha Ismail - Southern University College
+
+Advisor:
+- Dr. Steven Tan - Raffles University
+
+Testers:
+- Jorge Sinval - Nanyang Technology University
