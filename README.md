@@ -66,7 +66,9 @@ This module is licensed under the GPU License. See the LICENSE file for more inf
 
 ## Acknowledgements
 
-This module was developed  as part of ongoing research into content validity and measurement tools.Contributors list:
+This module was developed  as part of ongoing research into content validity and measurement tools.
+Contributors list as below. 
+
 Developers:
 - LerLer Chan - Southern University College
 - Noor Fatihah Mazlam - Southern University College
