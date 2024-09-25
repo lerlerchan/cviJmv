@@ -28,7 +28,7 @@ Paper link is coming soon.
 
 To install the Content Validity Index module, follow these steps:
 
-1. Open [Jamovi version 2.6.13](https://www.jamovi.org/downloads/jamovi-2.6.13.0-win-x64.exe) or version [2.3.28 (solid)](https://www.jamovi.org/downloads/jamovi-2.3.28.0-win64.exe)
+1. Open [Jamovi version 2.6.13](https://www.jamovi.org/downloads/jamovi-2.6.13.0-win-x64.exe) ~~or version [2.3.28 (solid)](https://www.jamovi.org/downloads/jamovi-2.3.28.0-win64.exe)~~
 2. Download the [cviJmv_0.0.0.jmo](https://github.com/lerlerchan/cviJmv/blob/main/cviJmv_0.0.0.jmo) file 
 3. Navigate to the 'Modules' tab.
 4. Click on 'Sideload' tab
