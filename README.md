@@ -1,5 +1,5 @@
 # Content Validity Index Module for Jamovi
-# DEVELOPING STAGE
+# User Testing and Debug STAGE
 
 ## Overview
 
