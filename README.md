@@ -58,8 +58,7 @@ To install the Content Validity Index module, follow these steps:
 Below is a simple example of how to use the module:
 
 1. **Input Data**: Enter the item relevance ratings from your panel of experts.
-2. **Select Analysis**: Choose to calculate I-CVI, UA, S-CVI/Ave, and S-CVI/UA.
-3. **View Results**: The results will display the calculated indices and any associated statistics.
+2. **View Results**: The results will display the calculated indices and any associated statistics.
 
 ## Support
 
