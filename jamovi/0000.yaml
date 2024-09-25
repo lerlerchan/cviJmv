@@ -1,16 +1,14 @@
 ---
-title: What the Package Does (Title Case)
+title: Content Validity Index Calculation Module
 name: cviJmv
 version: 0.0.0
 jms: '1.0'
 authors:
-  - Who wrote it
-maintainer: The package maintainer <yourself@somewhere.net>
-date: '1970-01-01'
+  - Ler-Kuan Chan
+maintainer: The package maintainer <lkchan@sc.edu.my>
+date: '2024-09-25'
 type: R
-description: >-
-  More about what it does (maybe more than one line) Use four spaces when
-  indenting paragraphs within the Description.
+description: To calculate key metrics related to content validity
 analyses:
   - title: Content Validity Index Calculation
     name: CVI

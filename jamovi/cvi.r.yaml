@@ -7,5 +7,25 @@ items:
     - name:  text
       title: Content Validity Index Calculation
       type:  Preformatted
-
+      
+    - name: scoreTable
+      title: Table
+      type: Table
+      rows: 2
+      columns:
+      - name: var
+        title: ''
+        type: text
+      
+    - name: cviTable
+      title: CVI Table
+      type: Table
+      rows: 3
+      columns:
+      - name: var
+        title: ''
+        type: text
+      - name: varSCVI
+        title: 'Average'
+        type: number
 ...

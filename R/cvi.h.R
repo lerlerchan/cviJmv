@@ -6,14 +6,7 @@ CVIOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     inherit = jmvcore::Options,
     public = list(
         initialize = function(
-            dep = NULL,
-            BOLD = NULL,
-            expertAgreement = FALSE,
-            UA = FALSE,
-            iCVI = FALSE,
-            sCVIAve = FALSE,
-            average_prpAverage = FALSE,
-            sCVIUA = FALSE, ...) {
+            dep = NULL, ...) {
 
             super$initialize(
                 package="cviJmv",
@@ -24,68 +17,22 @@ CVIOptions <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             private$..dep <- jmvcore::OptionVariables$new(
                 "dep",
                 dep)
-            private$..BOLD <- jmvcore::OptionAction$new(
-                "BOLD",
-                BOLD)
-            private$..expertAgreement <- jmvcore::OptionBool$new(
-                "expertAgreement",
-                expertAgreement,
-                default=FALSE)
-            private$..UA <- jmvcore::OptionBool$new(
-                "UA",
-                UA,
-                default=FALSE)
-            private$..iCVI <- jmvcore::OptionBool$new(
-                "iCVI",
-                iCVI,
-                default=FALSE)
-            private$..sCVIAve <- jmvcore::OptionBool$new(
-                "sCVIAve",
-                sCVIAve,
-                default=FALSE)
-            private$..average_prpAverage <- jmvcore::OptionBool$new(
-                "average_prpAverage",
-                average_prpAverage,
-                default=FALSE)
-            private$..sCVIUA <- jmvcore::OptionBool$new(
-                "sCVIUA",
-                sCVIUA,
-                default=FALSE)
 
             self$.addOption(private$..dep)
-            self$.addOption(private$..BOLD)
-            self$.addOption(private$..expertAgreement)
-            self$.addOption(private$..UA)
-            self$.addOption(private$..iCVI)
-            self$.addOption(private$..sCVIAve)
-            self$.addOption(private$..average_prpAverage)
-            self$.addOption(private$..sCVIUA)
         }),
     active = list(
-        dep = function() private$..dep$value,
-        BOLD = function() private$..BOLD$value,
-        expertAgreement = function() private$..expertAgreement$value,
-        UA = function() private$..UA$value,
-        iCVI = function() private$..iCVI$value,
-        sCVIAve = function() private$..sCVIAve$value,
-        average_prpAverage = function() private$..average_prpAverage$value,
-        sCVIUA = function() private$..sCVIUA$value),
+        dep = function() private$..dep$value),
     private = list(
-        ..dep = NA,
-        ..BOLD = NA,
-        ..expertAgreement = NA,
-        ..UA = NA,
-        ..iCVI = NA,
-        ..sCVIAve = NA,
-        ..average_prpAverage = NA,
-        ..sCVIUA = NA)
+        ..dep = NA)
 )
 
 CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "CVIResults",
     inherit = jmvcore::Group,
     active = list(
-        text = function() private$.items[["text"]]),
+        text = function() private$.items[["text"]],
+        scoreTable = function() private$.items[["scoreTable"]],
+        cviTable = function() private$.items[["cviTable"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -96,7 +43,31 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$add(jmvcore::Preformatted$new(
                 options=options,
                 name="text",
-                title="Content Validity Index Calculation"))}))
+                title="Content Validity Index Calculation"))
+            self$add(jmvcore::Table$new(
+                options=options,
+                name="scoreTable",
+                title="Table",
+                rows=2,
+                columns=list(
+                    list(
+                        `name`="var", 
+                        `title`="", 
+                        `type`="text"))))
+            self$add(jmvcore::Table$new(
+                options=options,
+                name="cviTable",
+                title="CVI Table",
+                rows=3,
+                columns=list(
+                    list(
+                        `name`="var", 
+                        `title`="", 
+                        `type`="text"),
+                    list(
+                        `name`="varSCVI", 
+                        `title`="Average", 
+                        `type`="number"))))}))
 
 CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "CVIBase",
@@ -124,29 +95,23 @@ CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' 
 #' @param data .
 #' @param dep .
-#' @param BOLD .
-#' @param expertAgreement .
-#' @param UA .
-#' @param iCVI .
-#' @param sCVIAve .
-#' @param average_prpAverage .
-#' @param sCVIUA .
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
+#'   \code{results$scoreTable} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$cviTable} \tab \tab \tab \tab \tab a table \cr
 #' }
+#'
+#' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
+#'
+#' \code{results$scoreTable$asDF}
+#'
+#' \code{as.data.frame(results$scoreTable)}
 #'
 #' @export
 CVI <- function(
     data,
-    dep,
-    BOLD,
-    expertAgreement = FALSE,
-    UA = FALSE,
-    iCVI = FALSE,
-    sCVIAve = FALSE,
-    average_prpAverage = FALSE,
-    sCVIUA = FALSE) {
+    dep) {
 
     if ( ! requireNamespace("jmvcore", quietly=TRUE))
         stop("CVI requires jmvcore to be installed (restart may be required)")
@@ -159,14 +124,7 @@ CVI <- function(
 
 
     options <- CVIOptions$new(
-        dep = dep,
-        BOLD = BOLD,
-        expertAgreement = expertAgreement,
-        UA = UA,
-        iCVI = iCVI,
-        sCVIAve = sCVIAve,
-        average_prpAverage = average_prpAverage,
-        sCVIUA = sCVIUA)
+        dep = dep)
 
     analysis <- CVIClass$new(
         options = options,
