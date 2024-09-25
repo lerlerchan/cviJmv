@@ -6,7 +6,6 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
     inherit = CVIBase,
     private = list(
         .run = function() {
-
             # `self$data` contains the data
             # `self$options` contains the options
             # `self$results` contains the results object (to populate)
@@ -138,8 +137,9 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           # Calculate the UA values
           UA_values_df <- UA(transformed_df)
           scviUA <- sum(UA_values_df) /ncol(transformed_df)
-          self$results$text$setContent(UA_values_df)
+          #self$results$text$setContent(UA_values_df)
           
+          #display frequency
           table1 <- self$results$scoreTable
           for (name in self$options$dep){
             table1$addColumn(name, title=name)
@@ -163,8 +163,14 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             values <- as.list(UA_values_df[colNo])
             table1$setRow(rowNo = 3, values)
           }
-          table1$setRow(rowNo = 3, list(var = paste("UA")))
+          table1$setRow(rowNo = 3, list(var = paste("Universal Agreement (UA)")))
           
+         # for (colNon in seq_len(nrow(UA_values_df))) {
+        #    row <- as.list(UA_values_df[colNon, drop=TRUE])
+        #    row$var <- 'Universal Agreement (UA)'
+        #    table1$setRow(rowNo=colNon, values=row)
+        #  }
+    
           
           #display the s-cvi average table on the result area
           table2 <- self$results$cviTable
@@ -186,6 +192,16 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             var="Propotion Relevance",
             varSCVI = format(round(average_prpRev, digits=2), nsmall = 2)
           ))
+          
+          #output proportion relevance of experts in table
+          table3 <- self$results$propTable
+          for (colNom in seq_along(prpRev_df)) {
+            if (colNom > table3$rowCount)
+              break()
+            values <- as.list(prpRev_df[colNom])
+            table3$setRow(rowNo=colNom, values)
+            table3$setRow(rowNo=colNom, list(var=paste("Expert ", colNom)))
+          }
 
           
           

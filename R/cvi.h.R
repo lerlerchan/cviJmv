@@ -32,7 +32,8 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     active = list(
         text = function() private$.items[["text"]],
         scoreTable = function() private$.items[["scoreTable"]],
-        cviTable = function() private$.items[["cviTable"]]),
+        cviTable = function() private$.items[["cviTable"]],
+        propTable = function() private$.items[["propTable"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -47,7 +48,7 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
             self$add(jmvcore::Table$new(
                 options=options,
                 name="scoreTable",
-                title="Table",
+                title="Frequency Table",
                 rows=3,
                 columns=list(
                     list(
@@ -67,7 +68,21 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     list(
                         `name`="varSCVI", 
                         `title`="Average", 
-                        `type`="number"))))}))
+                        `type`="number"))))
+            self$add(jmvcore::Table$new(
+                options=options,
+                name="propTable",
+                title="Proportion relevance of experts",
+                rows=2,
+                columns=list(
+                    list(
+                        `name`="var", 
+                        `title`="", 
+                        `type`="text"),
+                    list(
+                        `name`="varScore", 
+                        `title`="PR Score", 
+                        `type`="text"))))}))
 
 CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     "CVIBase",
@@ -100,6 +115,7 @@ CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
 #'   \code{results$scoreTable} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$cviTable} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$propTable} \tab \tab \tab \tab \tab a table \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:

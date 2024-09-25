@@ -9,7 +9,7 @@ items:
       type:  Preformatted
       
     - name: scoreTable
-      title: Table
+      title: Frequency Table
       type: Table
       rows: 3
       columns:
@@ -28,4 +28,18 @@ items:
       - name: varSCVI
         title: 'Average'
         type: number
+        
+    - name: propTable
+      title: Proportion relevance of experts
+      type: Table
+      rows: 2
+      columns:
+      - name: var
+        title: ''
+        type: text
+      - name: varScore
+        title: 'PR Score'
+        type: text
+        
+
 ...
