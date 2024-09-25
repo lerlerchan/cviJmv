@@ -28,7 +28,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           # Transform the dataframe
           transformed_df <- transform_cells(data)
           
-          self$results$text$setContent(transformed_df)
+          #self$results$text$setContent(transformed_df)
           
           # Function to calculate proportion relevance
           proportion_relevance <- function(df) {
@@ -41,8 +41,8 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             return(proportions)
           }
           # proportion Relevance
-          prpRev <- proportion_relevance(transformed_df)
-          #self$results$text$setContent(prpRev)
+          prpRev_df <- proportion_relevance(transformed_df)
+          #self$results$text$setContent(prpRev_df)
           
           # Function to average the proportion relevance 
           average_proportion_relevance <- function(proportions) {
@@ -56,7 +56,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           }
           
           # Calculate the average proportion relevance
-          average_prpRev <- average_proportion_relevance(prpRev)
+          average_prpRev <- average_proportion_relevance(prpRev_df)
           
           # Function calculate expert in agreement
           sum_expert_agreement <- function(df) {
@@ -71,13 +71,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
         
           #self$results$text$setContent(expAgrSum_df)
           
-          table1 <- self$results$scoreTable
-          for (name in self$options$dep){
-            table1$addColumn(name, title=name)
-          }
-         
-
-          
+        
           # Function calculate the I-CVI function
           ICVI <- function(df) {
             # Calculate the sum of values in each col
@@ -95,7 +89,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           
           # Calculate the I-CVI values
           I_CVI_values_df <- ICVI(transformed_df)
-        #  self$results$text$setContent(I_CVI_values_df)
+          #self$results$text$setContent(I_CVI_values_df)
           
           # Define the scvi_ave function
           scvi_ave <- function(df) {
@@ -114,6 +108,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           # Use the sum_expert_agreement result as input
           scviAve <- scvi_ave(I_CVI_values_df)
           #self$results$text$setContent(scviAve)
+          scviAvePR <-scvi_ave(prpRev_df)
           
           # Define the UA function
           UA <- function(df) {
@@ -141,25 +136,53 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           
           
           # Calculate the UA values
-          UA_values <- UA(transformed_df)
+          UA_values_df <- UA(transformed_df)
+          scviUA <- sum(UA_values_df) /ncol(transformed_df)
+          self$results$text$setContent(UA_values_df)
           
-          scviUA <- sum(UA_values) /ncol(transformed_df)
+          table1 <- self$results$scoreTable
+          for (name in self$options$dep){
+            table1$addColumn(name, title=name)
+          }
+      
+          for (colNo in seq_along(expAgrSum_df)) {
+            # Extract the column as a list
+            values <- as.list(expAgrSum_df[colNo])
+            table1$setRow(rowNo = 1, values)
+            #self$results$text$setContent(values)
+          }
+          table1$setRow(rowNo = 1, list(var = paste("Experts in Agreement")))
           
-          #print(scviUA)
+          for (colNo in seq_along(I_CVI_values_df)){
+            values <- as.list(I_CVI_values_df[colNo])
+            table1$setRow(rowNo = 2, values)
+          }
+          table1$setRow(rowNo = 2, list(var = paste("I-CVI")))
+          
+          for (colNo in seq_along(UA_values_df)){
+            values <- as.list(UA_values_df[colNo])
+            table1$setRow(rowNo = 3, values)
+          }
+          table1$setRow(rowNo = 3, list(var = paste("UA")))
+          
           
           #display the s-cvi average table on the result area
           table2 <- self$results$cviTable
           #row1 s-cvi/ave
           table2$setRow(rowNo=1, value=list(
-            var = "S-CVI/Ave",
+            var = "S-CVI/Ave (based in I-CVI)",
             varSCVI = format(round(scviAve, digits=2), nsmall = 2)
           ))
-          #row2 s-cvi/ua
           table2$setRow(rowNo=2, value=list(
+            var="S-CVI/Ave (based on proportion relevance)",
+            varSCVI = format(round(scviAvePR, digits=2), nsmall = 2)
+          ))
+          #row3 s-cvi/ua
+          table2$setRow(rowNo=3, value=list(
             var="S-CVI/UA",
             varSCVI = format(round(scviUA, digits=2), nsmall = 2)
           ))
-          table2$setRow(rowNo=3, value=list(
+          table2$setRow(rowNo=4, value=list(
             var="Propotion Relevance",
             varSCVI = format(round(average_prpRev, digits=2), nsmall = 2)
           ))

@@ -11,7 +11,7 @@ items:
     - name: scoreTable
       title: Table
       type: Table
-      rows: 2
+      rows: 3
       columns:
       - name: var
         title: ''
@@ -20,7 +20,7 @@ items:
     - name: cviTable
       title: CVI Table
       type: Table
-      rows: 3
+      rows: 4
       columns:
       - name: var
         title: ''

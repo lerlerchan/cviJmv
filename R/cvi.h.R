@@ -48,7 +48,7 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="scoreTable",
                 title="Table",
-                rows=2,
+                rows=3,
                 columns=list(
                     list(
                         `name`="var", 
@@ -58,7 +58,7 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="cviTable",
                 title="CVI Table",
-                rows=3,
+                rows=4,
                 columns=list(
                     list(
                         `name`="var", 
