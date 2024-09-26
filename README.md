@@ -1,5 +1,5 @@
 # Content Validity Index Module for Jamovi
-# DEVELOPING STAGE
+# User Testing and Debug STAGE
 
 ## Overview
 
@@ -11,11 +11,16 @@ The Content Validity Index (CVI) module is designed to assist researchers and pr
 - **S-CVI/UA (Scale-level Content Validity Index, Universal Agreement method)**: Measures the proportion of items that achieved universal agreement among experts.
 
 ## References
+If you use the **cviJMV** module in your research, please cite it as follows:
 
 LK, Chan (2024) cviJMV [Jamovi Module], Retrieved from
 https://github.com/lerlerchan/cviJmv
 
 Paper link is coming soon.
+
+Our module references the work of
+
+Yusoff MSB. ABC of content validation and content validity index calculation. Education in Medicine Journal. 2019; 11(2): 49-54. https://doi.org/10.21315/eimj2019.11.2.3 (https://eduimed.usm.my/EIMJ20191102/EIMJ20191102_06.pdf)
 
 ## Features
 
@@ -53,8 +58,7 @@ To install the Content Validity Index module, follow these steps:
 Below is a simple example of how to use the module:
 
 1. **Input Data**: Enter the item relevance ratings from your panel of experts.
-2. **Select Analysis**: Choose to calculate I-CVI, UA, S-CVI/Ave, and S-CVI/UA.
-3. **View Results**: The results will display the calculated indices and any associated statistics.
+2. **View Results**: The results will display the calculated indices and any associated statistics.
 
 ## Support
 
