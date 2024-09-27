@@ -90,7 +90,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           I_CVI_values_df <- ICVI(transformed_df)
           #self$results$text$setContent(I_CVI_values_df)
           
-          # Define the scvi_ave function
+          # Function to calculate the scvi_ave function
           scvi_ave <- function(df) {
             # Calculate the total of expert agreement (sum of all column sums)
             total_agreement <- sum(df)
@@ -109,7 +109,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           #self$results$text$setContent(scviAve)
           scviAvePR <-scvi_ave(prpRev_df)
           
-          # Define the UA function
+          # Caclaute the UA function
           UA <- function(df) {
             # Calculate the sum of each column
             col_sums <- colSums(df, na.rm = TRUE)
@@ -177,20 +177,20 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           #row1 s-cvi/ave
           table2$setRow(rowNo=1, value=list(
             var = "S-CVI/Ave (based in I-CVI)",
-            varSCVI = format(round(scviAve, digits=2), nsmall = 2)
+            varSCVI = format(round(scviAve, digits=3), nsmall = 3)
           ))
           table2$setRow(rowNo=2, value=list(
             var="S-CVI/Ave (based on proportion relevance)",
-            varSCVI = format(round(scviAvePR, digits=2), nsmall = 2)
+            varSCVI = format(round(scviAvePR, digits=3), nsmall = 3)
           ))
           #row3 s-cvi/ua
           table2$setRow(rowNo=3, value=list(
             var="S-CVI/UA",
-            varSCVI = format(round(scviUA, digits=2), nsmall = 2)
+            varSCVI = format(round(scviUA, digits=3), nsmall = 3)
           ))
           table2$setRow(rowNo=4, value=list(
             var="Propotion Relevance",
-            varSCVI = format(round(average_prpRev, digits=2), nsmall = 2)
+            varSCVI = format(round(average_prpRev, digits=3), nsmall = 3)
           ))
           
           #output proportion relevance of experts in table
