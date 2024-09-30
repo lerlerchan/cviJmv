@@ -73,15 +73,11 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="propTable",
                 title="Proportion relevance of experts",
-                rows=2,
+                rows=1,
                 columns=list(
                     list(
                         `name`="var", 
                         `title`="", 
-                        `type`="text"),
-                    list(
-                        `name`="varScore", 
-                        `title`="PR Score", 
                         `type`="text"))))}))
 
 CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(

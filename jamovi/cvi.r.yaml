@@ -32,14 +32,14 @@ items:
     - name: propTable
       title: Proportion relevance of experts
       type: Table
-      rows: 2
+      rows: 1
       columns:
       - name: var
         title: ''
         type: text
-      - name: varScore
-        title: 'PR Score'
-        type: text
+     # - name: varScore
+    #    title: 'PR Score'
+     #   type: text
         
 
 ...
