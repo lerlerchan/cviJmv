@@ -29,17 +29,29 @@ items:
         title: 'Average'
         type: number
         
-    - name: propTable
-      title: Proportion relevance of experts
-      type: Table
-      rows: 1
-      columns:
-      - name: var
-        title: ''
-        type: text
+  #  - name: propTable
+  #    title: Proportion relevance of experts
+  #    type: Table
+  #    rows: 12
+  #    columns:
+  #    - name: var
+  #      title: ''
+  #      type: text
      # - name: varScore
     #    title: 'PR Score'
      #   type: text
+     
+    - name: propTable
+      title: Proportion Relevance of Experts
+      type: Table
+      rows: 0
+      columns:
+      - name: Expert
+        title: Expert
+        type: text
+      - name: Value
+        title: 'PR Score'
+        type: number
         
 
 ...

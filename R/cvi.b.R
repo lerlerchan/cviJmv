@@ -137,7 +137,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           # Calculate the UA values
           UA_values_df <- UA(transformed_df)
           scviUA <- sum(UA_values_df) /ncol(transformed_df)
-          #self$results$text$setContent(UA_values_df)
+          self$results$text$setContent(UA_values_df)
           
           #display frequency
           table1 <- self$results$scoreTable
@@ -157,48 +157,20 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             table1$setRow(rowNo = 2, values)
           }
           table1$setRow(rowNo = 2, list(var = paste("I-CVI")))
+
+         
+          df_name <- self$options$dep
+          combined_UA_df <-rbind(df_name, UA_values_df)
+          combined_UA_df <- as.matrix(combined_UA_df)
+          self$results$text$setContent(combined_UA_df)
           
-          # Define the number of rows and columns
-          num_rows <- 1
-          num_cols <- ncol(transformed_df)
-          # Create a DataFrame filled with 0.000
-          df <- data.frame(matrix(rep(0.000, num_rows * num_cols), nrow = num_rows, ncol = num_cols))
-          
-          # Set column names (optional)
-          colnames(df) <- paste0("Column", 1:num_cols)
-          
-  
-          if (is.null(UA_values_df)) {
-            #self$results$text$setContent("NULL")
-            for (colNo in seq_along(UA_values_df)) {
-              values <- as.list(UA_values_df[colNo])
+          for (colNo in seq_along(I_CVI_values_df)) {
+              values <- as.list(combined_UA_df[2, colNo])
               table1$setRow(rowNo = 3, values)
-            }
-          }else{
-            #self$results$text$setContent("NOT NULL")
-            # Display 0.00 if UA_values_df is NULL
-            for (colNo in seq_along(df)) {
-              values <- as.list(df[colNo])
-              table1$setRow(rowNo = 3, values)
-              }
           }
           
-          
           table1$setRow(rowNo = 3, list(var = paste("Universal Agreement (UA)")))
-          
-          
-          # Assuming prpRev_df is your data frame
-          num_rows <- nrow(prpRev_df)
 
-          
-         # self$results$text$setContent(num_rows)
-          
-         # for (colNon in seq_len(nrow(UA_values_df))) {
-        #    row <- as.list(UA_values_df[colNon, drop=TRUE])
-        #    row$var <- 'Universal Agreement (UA)'
-        #    table1$setRow(rowNo=colNon, values=row)
-        #  }
-    
           
           #display the s-cvi average table on the result area
           table2 <- self$results$cviTable
@@ -220,19 +192,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             var="Propotion Relevance",
             varSCVI = format(round(average_prpRev, digits=3), nsmall = 3)
           ))
-          
-          #output proportion relevance of experts in table
-          #table3 <- self$results$propTable
-         # for (colNom in seq_along(prpRev_df)) {
-        #    if (colNom > table3$rowCount)
-        #      break()
-        #    values <- as.list(prpRev_df[colNom])
-        #    table3$setRow(rowNo=colNom, values)
-        #    table3$setRow(rowNo=colNom, list(var=paste("Expert ", colNom)))
-        # }
 
-          self$results$text$setContent(prpRev_df)
-          
           # Initialize an empty dataframe
           exp_df <- data.frame(Value = character(), stringsAsFactors = FALSE)
           # Define the number of rows
@@ -241,20 +201,22 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           for (i in 1:num_rows) {
             exp_df <- rbind(exp_df, data.frame(Value = paste0("Expert", i)))
           }
+          #combine dataframe  
+          combined_df <- cbind(exp_df, prpRev_df)
           
           table3 <- self$results$propTable
-          # Iterate over the column of names from exp_df, not the entire dataframe
-          for (expert in exp_df$Value) {
-            # expert is now a string, so you can safely pass it to addColumn()
-            table3$addColumn(expert, title = as.character(expert))
-          }
+          # Set up the table structure
+          #table3$addColumn(name = "Expert", type = "text")
+         # table3$addColumn(name = "PR Score", type = "number")
           
-          for (colNo in seq_along(prpRev_df)) {
-            # Extract the column as a list
-            values <- as.list(prpRev_df[colNo])
-            table3$setRow(rowNo = 1, values)
+          # Populate the table
+          for (rowNo in 1:nrow(combined_df)) {
+            table3$addRow(rowNo, list(
+              Expert = combined_df$Value[rowNo],
+              Value = combined_df$prpRev_df[rowNo]
+            ))
           }
-          table3$setRow(rowNo = 1, list(var = paste("Proporation relevance Score")))
+
           
       })
 )
