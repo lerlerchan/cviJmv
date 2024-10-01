@@ -9,6 +9,7 @@ The Content Validity Index (CVI) module is designed to assist researchers and pr
 - **UA (Universal Agreement among experts)**: Represents the percentage of items that have universal agreement among experts.
 - **S-CVI/Ave (Scale-level Content Validity Index, Average method)**: Calculates the average of I-CVIs across all items.
 - **S-CVI/UA (Scale-level Content Validity Index, Universal Agreement method)**: Measures the proportion of items that achieved universal agreement among experts.
+- **CVR (Content Validity Ratio)**: Represents the proportion of agreement among experts on the essentialness of an item.
 
 ## References
 If you use the **cviJMV** module in your research, please cite it as follows:
@@ -24,7 +25,7 @@ Yusoff MSB. ABC of content validation and content validity index calculation. Ed
 
 ## Features
 
-- **Easy Calculation**: Simplifies the calculation process for I-CVI, UA, S-CVI/Ave, and S-CVI/UA.
+- **Easy Calculation**: Simplifies the calculation process for I-CVI, UA, S-CVI/Ave, S-CVI/UA and CVR.
 - **User-friendly Interface**: Integrated seamlessly within Jamovi's interface for ease of use.
 - **Customizable Input**: Users can input data based on their specific research needs.
 - **Comprehensive Output**: Provides detailed output that includes all calculated indices along with relevant statistics.
@@ -74,12 +75,12 @@ This module was developed  as part of ongoing research into content validity and
 Contributors list as below. 
 
 Developers:
-- LerLer Chan - Southern University College
-- Noor Fatihah Mazlam - Southern University College
-- Khairunnisha Ismail - Southern University College
+- LerLer Chan - Southern University College, Malaysia
+- Noor Fatihah Mazlam - Southern University College, Malaysia
+- Khairunnisha Ismail - Southern University College, Malaysia
 
 Advisor:
-- Dr. Steven Tan - Raffles University
+- Dr. Steven Tan - Raffles University, Malaysia
 
 Testers:
-- Jorge Sinval - Nanyang Technology University
+- Jorge Sinval - Nanyang Technology University, Singapore
