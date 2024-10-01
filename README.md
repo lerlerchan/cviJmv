@@ -21,6 +21,8 @@ Paper link is coming soon.
 
 Our module references the work of
 
+Lawshe, C. H. “A QUANTITATIVE APPROACH TO CONTENT VALIDITY 1.” Personnel Psychology, vol. 28, no. 4, Dec. 1975, pp. 563–75. DOI.org (Crossref), https://doi.org/10.1111/j.1744-6570.1975.tb01393.x.(https://onlinelibrary.wiley.com/doi/10.1111/j.1744-6570.1975.tb01393.x?msockid=3fe1f5f3679d6d8d1664e62c665d6ce5)
+
 Yusoff MSB. ABC of content validation and content validity index calculation. Education in Medicine Journal. 2019; 11(2): 49-54. https://doi.org/10.21315/eimj2019.11.2.3 (https://eduimed.usm.my/EIMJ20191102/EIMJ20191102_06.pdf)
 
 ## Features
