@@ -85,4 +85,4 @@ Advisor:
 - Dr. Steven Tan - Raffles University, Malaysia
 
 Testers:
-- Jorge Sinval - Nanyang Technology University, Singapore
+- Jorge Sinval - Nanyang Technological University, Singapore
