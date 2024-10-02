@@ -9,6 +9,7 @@ The Content Validity Index (CVI) module is designed to assist researchers and pr
 - **UA (Universal Agreement among experts)**: Represents the percentage of items that have universal agreement among experts.
 - **S-CVI/Ave (Scale-level Content Validity Index, Average method)**: Calculates the average of I-CVIs across all items.
 - **S-CVI/UA (Scale-level Content Validity Index, Universal Agreement method)**: Measures the proportion of items that achieved universal agreement among experts.
+- **CVR (Content Validity Ratio)**: Represents the proportion of agreement among experts on the essentialness of an item.
 
 ## References
 If you use the **cviJMV** module in your research, please cite it as follows:
@@ -20,11 +21,13 @@ Paper link is coming soon.
 
 Our module references the work of
 
+Lawshe, C. H. “A QUANTITATIVE APPROACH TO CONTENT VALIDITY 1.” Personnel Psychology, vol. 28, no. 4, Dec. 1975, pp. 563–75. DOI.org (Crossref), https://doi.org/10.1111/j.1744-6570.1975.tb01393.x.(https://onlinelibrary.wiley.com/doi/10.1111/j.1744-6570.1975.tb01393.x?msockid=3fe1f5f3679d6d8d1664e62c665d6ce5)
+
 Yusoff MSB. ABC of content validation and content validity index calculation. Education in Medicine Journal. 2019; 11(2): 49-54. https://doi.org/10.21315/eimj2019.11.2.3 (https://eduimed.usm.my/EIMJ20191102/EIMJ20191102_06.pdf)
 
 ## Features
 
-- **Easy Calculation**: Simplifies the calculation process for I-CVI, UA, S-CVI/Ave, and S-CVI/UA.
+- **Easy Calculation**: Simplifies the calculation process for I-CVI, UA, S-CVI/Ave, S-CVI/UA and CVR.
 - **User-friendly Interface**: Integrated seamlessly within Jamovi's interface for ease of use.
 - **Customizable Input**: Users can input data based on their specific research needs.
 - **Comprehensive Output**: Provides detailed output that includes all calculated indices along with relevant statistics.
@@ -74,12 +77,12 @@ This module was developed  as part of ongoing research into content validity and
 Contributors list as below. 
 
 Developers:
-- LerLer Chan - Southern University College
-- Noor Fatihah Mazlam - Southern University College
-- Khairunnisha Ismail - Southern University College
+- LerLer Chan - Southern University College, Malaysia
+- Noor Fatihah Mazlam - Southern University College, Malaysia
+- Khairunnisha Ismail - Southern University College, Malaysia
 
 Advisor:
-- Dr. Steven Tan - Raffles University
+- Dr. Steven Tan - Raffles University, Malaysia
 
 Testers:
-- Jorge Sinval - Nanyang Technology University
+- Jorge Sinval - Nanyang Technological University, Singapore
