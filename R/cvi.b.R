@@ -189,7 +189,7 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           #self$results$text$setContent(uaValues)
  
           for (i in 1:nrow(combined_UA_df)) {
-            values <-c(combined_UA_df$Item[i], combined_UA_df$UaValue[i])
+            values <- (combined_UA_df$UaValue[i])
             table1$setRow(rowNo = 3, values)
           }
           
