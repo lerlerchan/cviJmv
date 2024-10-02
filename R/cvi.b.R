@@ -133,11 +133,27 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             return(UA_values)
           }
           
-          
           # Calculate the UA values
           UA_values_df <- UA(transformed_df)
           scviUA <- sum(UA_values_df) /ncol(transformed_df)
-          self$results$text$setContent(UA_values_df)
+          
+          # Function to calculate Content Validity Ratio (CVR) 
+          calculate_cvr <- function(df) {
+            
+            # Count the total number of expert (n)
+            n <- nrow(df)
+            
+            # Count the number of expert indicating "essential" (assuming a rating of 3 or 4 is considered essential)
+            ne <- sum(df[[1]] %in% c(3, 4))
+            
+            # Calculate CVR
+            cvr <- (ne - (n / 2)) / (n / 2)
+            
+            return(cvr)
+          }
+          #calculate CVR
+          cvr <- calculate_cvr(transformed_df)
+          
           
           #display frequency
           table1 <- self$results$scoreTable
@@ -160,17 +176,24 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
 
          
           df_name <- self$options$dep
-          combined_UA_df <-rbind(df_name, UA_values_df)
-          combined_UA_df <- as.matrix(combined_UA_df)
-          self$results$text$setContent(combined_UA_df)
+          #combined_UA_df <-rbind(df_name, UA_values_df)
+          #combined_UA_df <- as.matrix(combined_UA_df)
+          #colnames(combined_UA_df) <- c(df_name)
           
-          for (colNo in seq_along(I_CVI_values_df)) {
-              values <- as.list(combined_UA_df[2, colNo])
-              table1$setRow(rowNo = 3, values)
+          combined_UA_df <- data.frame(
+            Item = df_name,
+            UaValue = UA_values_df
+          )
+          self$results$text$setContent(combined_UA_df)
+
+          #self$results$text$setContent(uaValues)
+ 
+          for (i in 1:nrow(combined_UA_df)) {
+            values <-c(combined_UA_df$Item[i], combined_UA_df$UaValue[i])
+            table1$setRow(rowNo = 3, values)
           }
           
           table1$setRow(rowNo = 3, list(var = paste("Universal Agreement (UA)")))
-
           
           #display the s-cvi average table on the result area
           table2 <- self$results$cviTable
@@ -191,6 +214,10 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           table2$setRow(rowNo=4, value=list(
             var="Propotion Relevance",
             varSCVI = format(round(average_prpRev, digits=3), nsmall = 3)
+          ))
+          table2$setRow(rowNo=5, value=list(
+            var="CVR",
+            varSCVI = format(round(cvr, digits=3), nsmall = 3)
           ))
 
           # Initialize an empty dataframe

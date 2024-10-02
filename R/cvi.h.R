@@ -59,7 +59,7 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="cviTable",
                 title="CVI Table",
-                rows=4,
+                rows=5,
                 columns=list(
                     list(
                         `name`="var", 
