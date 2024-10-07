@@ -8,14 +8,14 @@ items:
       title: Content Validity Index Calculation
       type:  Preformatted
       
-    - name: scoreTable
-      title: Frequency Table
-      type: Table
-      rows: 3
-      columns:
-      - name: var
-        title: ''
-        type: text
+#    - name: scoreTable
+#      title: Frequency Table
+#      type: Table
+#      rows: 3
+#      columns:
+#      - name: var
+#        title: ''
+#        type: text
       
     - name: cviTable
       title: CVI Table
@@ -53,5 +53,22 @@ items:
         title: 'PR Score'
         type: number
         
-
+    - name: scoreTable2
+      title: Score Table
+      type: Table
+      rows: 0
+      columns:
+      - name: Item
+        title: Item
+        type: text
+      - name: eA
+        title: 'Experts in Agreement'
+        type: number
+      - name: iCvi
+        title: 'I-CVI'
+        type: number
+      - name: uA
+        title: 'UA'
+        type: number
+        
 ...

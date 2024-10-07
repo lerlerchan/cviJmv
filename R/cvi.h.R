@@ -31,9 +31,9 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
     inherit = jmvcore::Group,
     active = list(
         text = function() private$.items[["text"]],
-        scoreTable = function() private$.items[["scoreTable"]],
         cviTable = function() private$.items[["cviTable"]],
-        propTable = function() private$.items[["propTable"]]),
+        propTable = function() private$.items[["propTable"]],
+        scoreTable2 = function() private$.items[["scoreTable2"]]),
     private = list(),
     public=list(
         initialize=function(options) {
@@ -45,16 +45,6 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                 options=options,
                 name="text",
                 title="Content Validity Index Calculation"))
-            self$add(jmvcore::Table$new(
-                options=options,
-                name="scoreTable",
-                title="Frequency Table",
-                rows=3,
-                columns=list(
-                    list(
-                        `name`="var", 
-                        `title`="", 
-                        `type`="text"))))
             self$add(jmvcore::Table$new(
                 options=options,
                 name="cviTable",
@@ -82,6 +72,28 @@ CVIResults <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
                     list(
                         `name`="Value", 
                         `title`="PR Score", 
+                        `type`="number"))))
+            self$add(jmvcore::Table$new(
+                options=options,
+                name="scoreTable2",
+                title="Score Table",
+                rows=0,
+                columns=list(
+                    list(
+                        `name`="Item", 
+                        `title`="Item", 
+                        `type`="text"),
+                    list(
+                        `name`="eA", 
+                        `title`="Experts in Agreement", 
+                        `type`="number"),
+                    list(
+                        `name`="iCvi", 
+                        `title`="I-CVI", 
+                        `type`="number"),
+                    list(
+                        `name`="uA", 
+                        `title`="UA", 
                         `type`="number"))))}))
 
 CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
@@ -113,16 +125,16 @@ CVIBase <- if (requireNamespace("jmvcore", quietly=TRUE)) R6::R6Class(
 #' @return A results object containing:
 #' \tabular{llllll}{
 #'   \code{results$text} \tab \tab \tab \tab \tab a preformatted \cr
-#'   \code{results$scoreTable} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$cviTable} \tab \tab \tab \tab \tab a table \cr
 #'   \code{results$propTable} \tab \tab \tab \tab \tab a table \cr
+#'   \code{results$scoreTable2} \tab \tab \tab \tab \tab a table \cr
 #' }
 #'
 #' Tables can be converted to data frames with \code{asDF} or \code{\link{as.data.frame}}. For example:
 #'
-#' \code{results$scoreTable$asDF}
+#' \code{results$cviTable$asDF}
 #'
-#' \code{as.data.frame(results$scoreTable)}
+#' \code{as.data.frame(results$cviTable)}
 #'
 #' @export
 CVI <- function(

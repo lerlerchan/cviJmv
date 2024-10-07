@@ -133,9 +133,23 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
             return(UA_values)
           }
           
+          #calcualte svi/ua
+          calculate_scvi_ua <- function(df) {
+            # Calculate the sum of items with universal agreement (all 1s)
+            items_with_ua <- sum(apply(df, 2, function(col) all(col == 1)))
+            
+            # Calculate total number of items
+            total_items <- ncol(df)
+            
+            # Calculate S-CVI/UA
+            scvi_ua <- items_with_ua / total_items
+            
+            return(scvi_ua)
+          }
+          
           # Calculate the UA values
           UA_values_df <- UA(transformed_df)
-          scviUA <- sum(UA_values_df) /ncol(transformed_df)
+          scviUA <- calculate_scvi_ua(transformed_df)
           
           # Function to calculate Content Validity Ratio (CVR) 
           calculate_cvr <- function(df) {
@@ -154,46 +168,27 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           #calculate CVR
           cvr <- calculate_cvr(transformed_df)
           
-          
-          #display frequency
-          table1 <- self$results$scoreTable
-          for (name1 in self$options$dep){
-            table1$addColumn(name1, title=name1)
-          }
-      
-          for (colNo in seq_along(expAgrSum_df)) {
-            # Extract the column as a list
-            values <- as.list(expAgrSum_df[colNo])
-            table1$setRow(rowNo = 1, values)
-          }
-          table1$setRow(rowNo = 1, list(var = paste("Experts in Agreement")))
-          
-          for (colNo in seq_along(I_CVI_values_df)){
-            values <- as.list(I_CVI_values_df[colNo])
-            table1$setRow(rowNo = 2, values)
-          }
-          table1$setRow(rowNo = 2, list(var = paste("I-CVI")))
-
+          deps_df <- data.frame(Value = character(), stringsAsFactors = FALSE)
          
-          df_name <- self$options$dep
-          #combined_UA_df <-rbind(df_name, UA_values_df)
-          #combined_UA_df <- as.matrix(combined_UA_df)
-          #colnames(combined_UA_df) <- c(df_name)
-          
-          combined_UA_df <- data.frame(
-            Item = df_name,
-            UaValue = UA_values_df
-          )
-          self$results$text$setContent(combined_UA_df)
+          for (item in self$options$dep){
+            deps_df <- rbind(deps_df, data.frame(Value = paste(item)))
+          }
 
-          #self$results$text$setContent(uaValues)
- 
-          for (i in 1:nrow(combined_UA_df)) {
-            values <- list(combined_UA_df$UaValue[i])
-            table1$setRow(rowNo = 3, values)
+          #self$results$text$setContent(deps_df) 
+          combined_score_df <- cbind(deps_df, expAgrSum_df, I_CVI_values_df, UA_values_df)
+                   
+          table1 <- self$results$scoreTable2
+          
+          for(rowNo in 1:nrow(combined_score_df)){
+            table1$addRow(rowNo, list(
+              Item = rowNo,
+              eA = combined_score_df$expAgrSum_df[rowNo],
+              iCvi = combined_score_df$I_CVI_values_df[rowNo],
+              uA = combined_score_df$UA_values_df[rowNo]
+            ))
           }
           
-          table1$setRow(rowNo = 3, list(var = paste("Universal Agreement (UA)")))
+          
           
           #display the s-cvi average table on the result area
           table2 <- self$results$cviTable
