@@ -8,15 +8,6 @@ items:
       title: Content Validity Index Calculation
       type:  Preformatted
       
-#    - name: scoreTable
-#      title: Frequency Table
-#      type: Table
-#      rows: 3
-#      columns:
-#      - name: var
-#        title: ''
-#        type: text
-      
     - name: cviTable
       title: CVI Table
       type: Table
@@ -29,18 +20,6 @@ items:
         title: 'Average'
         type: number
         
-  #  - name: propTable
-  #    title: Proportion relevance of experts
-  #    type: Table
-  #    rows: 12
-  #    columns:
-  #    - name: var
-  #      title: ''
-  #      type: text
-     # - name: varScore
-    #    title: 'PR Score'
-     #   type: text
-     
     - name: propTable
       title: Proportion Relevance of Experts
       type: Table

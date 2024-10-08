@@ -168,26 +168,9 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           #calculate CVR
           cvr <- calculate_cvr(transformed_df)
           
-          deps_df <- data.frame(Value = character(), stringsAsFactors = FALSE)
-         
-          for (item in self$options$dep){
-            deps_df <- rbind(deps_df, data.frame(Value = paste(item)))
-          }
-
-          #self$results$text$setContent(deps_df) 
-          combined_score_df <- cbind(deps_df, expAgrSum_df, I_CVI_values_df, UA_values_df)
-                   
-          table1 <- self$results$scoreTable2
-          
-          for(rowNo in 1:nrow(combined_score_df)){
-            table1$addRow(rowNo, list(
-              Item = rowNo,
-              eA = combined_score_df$expAgrSum_df[rowNo],
-              iCvi = combined_score_df$I_CVI_values_df[rowNo],
-              uA = combined_score_df$UA_values_df[rowNo]
-            ))
-          }
-          
+          ########################
+          #POPULATE TABLE SECTion#
+          ########################
           
           
           #display the s-cvi average table on the result area
@@ -227,10 +210,6 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
           combined_df <- cbind(exp_df, prpRev_df)
           
           table3 <- self$results$propTable
-          # Set up the table structure
-          #table3$addColumn(name = "Expert", type = "text")
-         # table3$addColumn(name = "PR Score", type = "number")
-          
           # Populate the table
           for (rowNo in 1:nrow(combined_df)) {
             table3$addRow(rowNo, list(
@@ -238,6 +217,26 @@ CVIClass <- if (requireNamespace('jmvcore', quietly=TRUE)) R6::R6Class(
               Value = combined_df$prpRev_df[rowNo]
             ))
           }
+          
+          deps_df <- data.frame(Value = character(), stringsAsFactors = FALSE)
+          
+          for (item in self$options$dep){
+            deps_df <- rbind(deps_df, data.frame(Value = paste(item)))
+          }
+          
+          combined_score_df <- cbind(deps_df, expAgrSum_df, I_CVI_values_df, UA_values_df)
+          
+          table1 <- self$results$scoreTable2
+          
+          for(rowNo in 1:nrow(combined_score_df)){
+            table1$addRow(rowNo, list(
+              Item = combined_score_df$Value[rowNo],
+              eA = combined_score_df$expAgrSum_df[rowNo],
+              iCvi = combined_score_df$I_CVI_values_df[rowNo],
+              uA = combined_score_df$UA_values_df[rowNo]
+            ))
+          }
+          
 
           
       })
