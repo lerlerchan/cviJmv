@@ -1,5 +1,4 @@
 # Content Validity Index Module for Jamovi
-# User Testing and Debug STAGE
 
 ## Overview
 
@@ -12,14 +11,14 @@ The Content Validity Index (CVI) module is designed to assist researchers and pr
 - **CVR (Content Validity Ratio)**: Represents the proportion of agreement among experts on the essentialness of an item.
 
 ## References
-If you use the **cviJMV** module in your research, please cite it as follows:
+If you use the **cviJMV** module in your research, **please cite it** as follows:
 
 LK, Chan (2024) cviJMV [Jamovi Module], Retrieved from
 https://github.com/lerlerchan/cviJmv
 
 Paper link is coming soon.
 
-Our module references the work of
+**Our module references the work of**
 
 Lawshe, C. H. “A QUANTITATIVE APPROACH TO CONTENT VALIDITY 1.” Personnel Psychology, vol. 28, no. 4, Dec. 1975, pp. 563–75. DOI.org (Crossref), https://doi.org/10.1111/j.1744-6570.1975.tb01393.x.(https://onlinelibrary.wiley.com/doi/10.1111/j.1744-6570.1975.tb01393.x?msockid=3fe1f5f3679d6d8d1664e62c665d6ce5)
 
@@ -77,12 +76,14 @@ This module was developed  as part of ongoing research into content validity and
 Contributors list as below. 
 
 Developers:
-- LerLer Chan - Southern University College, Malaysia
+- Ler-Kuan Chan - Southern University College, Malaysia
 - Noor Fatihah Mazlam - Southern University College, Malaysia
 - Khairunnisha Ismail - Southern University College, Malaysia
 
 Advisor:
 - Dr. Steven Tan - Raffles University, Malaysia
+- [Jorge Sinval](https://github.com/jorgesinval?tab=repositories) - Nanyang Technological University, Singapore
 
-Testers:
-- Jorge Sinval - Nanyang Technological University, Singapore
+Learning From:
+- (https://github.com/hyunsooseol/snowIRT/)
+- SUPER GIANT BIG THANK to [Jonathon Love](https://github.com/jonathon-love) from [Jamovi Project](https://github.com/jamovi)
