@@ -1,5 +1,4 @@
 # Content Validity Index Module for Jamovi
-# User Testing and Debug STAGE
 
 ## Overview
 
@@ -85,4 +84,4 @@ Advisor:
 - Dr. Steven Tan - Raffles University, Malaysia
 
 Testers:
-- Jorge Sinval - Nanyang Technological University, Singapore
+- [Jorge Sinval](https://github.com/jorgesinval?tab=repositories) - Nanyang Technological University, Singapore
