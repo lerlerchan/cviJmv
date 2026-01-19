@@ -1,0 +1,223 @@
+---
+title: "Introduction to Content Validity Analysis"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to Content Validity Analysis}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(contentvalidity)
+```
+
+## Overview
+
+The `contentvalidity` package provides comprehensive tools for calculating content validity metrics used in scale development and validation. This vignette introduces the main concepts and demonstrates how to use the package.
+
+## What is Content Validity?
+
+Content validity refers to the extent to which a measurement instrument adequately covers the construct it is designed to measure. When developing a new questionnaire, survey, or assessment tool, researchers typically ask a panel of subject matter experts to evaluate whether each item is relevant to the construct being measured.
+
+## Key Metrics
+
+### Content Validity Index (CVI)
+
+The **Content Validity Index (CVI)** is the most widely used metric for quantifying content validity. It can be calculated at two levels:
+
+- **I-CVI (Item-level CVI)**: The proportion of experts who rate an item as relevant
+- **S-CVI (Scale-level CVI)**: Aggregated measure for the entire instrument
+  - **S-CVI/Ave**: Mean of all I-CVI values
+  - **S-CVI/UA**: Proportion of items with Universal Agreement
+
+### Universal Agreement (UA)
+
+**Universal Agreement** indicates whether ALL experts rated an item as relevant. Items with UA = 1 have perfect agreement among experts.
+
+### Content Validity Ratio (CVR)
+
+**Lawshe's CVR** provides a statistical basis for content validity:
+
+$$CVR = \frac{n_e - N/2}{N/2}$$
+
+Where $n_e$ is the number of experts rating the item as essential and $N$ is the total number of experts.
+
+## Basic Usage
+
+### Preparing Your Data
+
+Your data should be organized with:
+- **Rows** = Experts (raters)
+- **Columns** = Items being evaluated
+- **Values** = Numeric ratings
+
+```{r example-data}
+# Example: 5 experts rating 4 items on a 4-point scale
+ratings <- data.frame(
+  item1 = c(4, 4, 3, 4, 3),  # Highly relevant
+  item2 = c(4, 4, 4, 4, 4),  # Perfect agreement
+  item3 = c(3, 2, 2, 3, 2),  # Mixed ratings
+  item4 = c(4, 3, 4, 4, 3)   # Good agreement
+)
+ratings
+```
+
+### Running the Analysis
+
+Use the `cvi()` function for a comprehensive analysis:
+
+```{r run-analysis}
+result <- cvi(ratings)
+print(result)
+```
+
+### Detailed Summary
+
+For more detailed output with interpretation:
+
+```{r summary}
+summary(result)
+```
+
+### Visualizing Results
+
+Plot I-CVI values with threshold lines:
+
+```{r plot, fig.width=7, fig.height=5}
+plot(result)
+```
+
+## Individual Metrics
+
+You can calculate individual metrics directly:
+
+```{r individual-metrics}
+# Item-level CVI
+icvi(ratings)
+
+# Scale-level CVI (Average method)
+scvi_ave(ratings)
+
+# Scale-level CVI (Universal Agreement)
+scvi_ua(ratings)
+
+# Universal Agreement
+ua(ratings)
+
+# Content Validity Ratio
+cvr(ratings)
+```
+
+## Flexible Rating Scales
+
+The package supports multiple rating scale formats:
+
+### 4-Point Scale (Default)
+
+```{r scale-4point}
+# 1 = not relevant, 2 = somewhat, 3 = quite, 4 = highly relevant
+# Values 3-4 are coded as "relevant"
+result_4pt <- cvi(ratings, scale = "4point")
+```
+
+### 3-Point Scale
+
+```{r scale-3point}
+ratings_3pt <- data.frame(
+  item1 = c(3, 3, 2, 3),
+  item2 = c(2, 2, 2, 1)
+)
+# Values 2-3 are coded as "relevant"
+result_3pt <- cvi(ratings_3pt, scale = "3point")
+```
+
+### Binary Scale
+
+```{r scale-binary}
+ratings_binary <- data.frame(
+  item1 = c(1, 1, 1, 0),
+  item2 = c(1, 1, 1, 1)
+)
+result_binary <- cvi(ratings_binary, scale = "binary")
+```
+
+### Custom Scale
+
+```{r scale-custom}
+# 5-point scale where 4-5 are "relevant"
+ratings_5pt <- data.frame(
+  item1 = c(5, 5, 4, 5),
+  item2 = c(4, 4, 4, 5),
+  item3 = c(3, 2, 4, 3)
+)
+result_custom <- cvi(ratings_5pt, scale = "custom", relevant_values = c(4, 5))
+```
+
+## Interpretation Guidelines
+
+Based on established literature, use these thresholds:
+
+| Metric | Threshold | Interpretation |
+|--------|-----------|----------------|
+| I-CVI | >= 0.78 | Acceptable (Lynn, 1986) |
+| S-CVI/Ave | >= 0.90 | Excellent (Polit & Beck, 2006) |
+| S-CVI/UA | >= 0.80 | Acceptable |
+
+### CVR Critical Values
+
+For CVR, significance depends on panel size. Use `cvr_critical()` to get the threshold:
+
+```{r cvr-critical}
+# Get critical value for 10 experts
+cvr_critical(10)
+
+# Check if items meet threshold
+n_experts <- 5
+critical_val <- cvr_critical(n_experts)
+item_cvr <- cvr(ratings)
+item_cvr >= critical_val
+```
+
+## Working with Expert Statistics
+
+The analysis also provides per-expert statistics:
+
+```{r expert-stats}
+result <- cvi(ratings)
+result$expert_stats
+```
+
+View in summary:
+
+```{r expert-summary}
+summary(result, show_experts = TRUE)
+```
+
+## Accessing Raw Binary Data
+
+If you need the transformed binary ratings:
+
+```{r binary-data}
+result$binary_data
+```
+
+Or transform directly:
+
+```{r transform-direct}
+transform_ratings(ratings, scale = "4point")
+```
+
+## References
+
+- Lynn, M. R. (1986). Determination and quantification of content validity. *Nursing Research*, 35(6), 382-385.
+
+- Polit, D. F., & Beck, C. T. (2006). The content validity index: Are you sure you know what's being reported? Critique and recommendations. *Research in Nursing & Health*, 29(5), 489-497.
+
+- Lawshe, C. H. (1975). A quantitative approach to content validity. *Personnel Psychology*, 28(4), 563-575.

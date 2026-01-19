@@ -1,0 +1,31 @@
+Package: contentvalidity
+Type: Package
+Title: Content Validity Analysis for Scale Development
+Version: 0.1.0
+Authors@R: person("Ler Ler", "Chan", email = "lkchan@sc.edu.my",
+                  role = c("aut", "cre"))
+Description: Comprehensive tools for calculating content validity metrics used in
+    scale development and validation. Includes Content Validity Index (CVI) at
+    item and scale levels, Content Validity Ratio (CVR) using Lawshe's formula,
+    and Universal Agreement (UA) indicators. Supports multiple rating scales
+    (4-point, 3-point, binary, or custom) and provides interpretation guidelines
+    based on established cutoff values. Designed for researchers developing
+    questionnaires, surveys, and measurement instruments.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.0
+Depends:
+    R (>= 3.5.0)
+Imports:
+    stats,
+    graphics
+Suggests:
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+URL: https://github.com/lerlerchan/contentvalidity
+BugReports: https://github.com/lerlerchan/contentvalidity/issues

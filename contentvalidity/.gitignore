@@ -1,0 +1,21 @@
+# R files
+.Rhistory
+.Rapp.history
+.RData
+.Ruserdata
+
+# R packages
+*.tar.gz
+*.Rcheck/
+
+# IDE
+.Rproj.user/
+*.Rproj
+
+# Compiled files
+src/*.o
+src/*.so
+src/*.dll
+
+# Documentation
+docs/
