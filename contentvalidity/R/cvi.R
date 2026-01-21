@@ -230,7 +230,7 @@ calculate_item_stats <- function(binary_matrix, compute_cvr = TRUE) {
   )
 
   if (compute_cvr) {
-    result$cvr <- cvr(binary_matrix)
+    result$cvr <- cvr(binary_matrix, is_binary = TRUE)
   }
 
   return(result)

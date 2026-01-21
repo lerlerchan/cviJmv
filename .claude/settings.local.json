@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:/Program Files/R/R-4.3.2/bin/Rscript.exe\" -e \"devtools::test\\(stop_on_failure = FALSE\\)\")",
+      "Bash(\"C:/Program Files/R/R-4.3.2/bin/Rscript.exe\" -e \"devtools::load_all\\(\\); print\\(transform_ratings\\(data.frame\\(item1 = c\\(4, NA, 3, 1\\)\\), scale = ''4point''\\)\\)\")",
+      "Bash(\"C:/Program Files/R/R-4.3.2/bin/Rscript.exe\" -e \"devtools::check\\(\\)\")",
+      "Bash(\"C:/Program Files/R/R-4.3.2/bin/Rscript.exe\" -e \"devtools::check\\(vignettes = FALSE\\)\")",
+      "Bash(\"C:/Program Files/R/R-4.3.2/bin/Rscript.exe\" -e \"testthat::set_max_fails\\(Inf\\); devtools::test\\(\\)\")"
+    ]
+  }
+}

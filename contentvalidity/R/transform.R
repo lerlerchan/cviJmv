@@ -90,9 +90,13 @@ scale <- match.arg(scale)
     rel_vals <- max(unique_vals)
   }
 
-  # Transform to binary
+  # Transform to binary (preserving NA positions)
+  binary_values <- as.integer(data_matrix %in% rel_vals)
+  # Restore NA values (the %in% operator converts NA to FALSE for matrices)
+  binary_values[is.na(data_matrix)] <- NA_integer_
+
   binary_matrix <- matrix(
-    as.integer(data_matrix %in% rel_vals),
+    binary_values,
     nrow = nrow(data_matrix),
     ncol = ncol(data_matrix),
     dimnames = dimnames(data_matrix)

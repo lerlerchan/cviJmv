@@ -47,25 +47,25 @@ test_that("icvi calculates correctly", {
   ratings_perfect <- data.frame(
     item1 = c(4, 4, 4, 4)
   )
-  expect_equal(icvi(ratings_perfect)[1], 1.0)
+  expect_equal(unname(icvi(ratings_perfect)[1]), 1.0)
 
   # No agreement (none relevant)
   ratings_none <- data.frame(
     item1 = c(1, 1, 1, 1)
   )
-  expect_equal(icvi(ratings_none)[1], 0.0)
+  expect_equal(unname(icvi(ratings_none)[1]), 0.0)
 
   # Half relevant
   ratings_half <- data.frame(
     item1 = c(4, 4, 1, 1)
   )
-  expect_equal(icvi(ratings_half)[1], 0.5)
+  expect_equal(unname(icvi(ratings_half)[1]), 0.5)
 
   # 3 out of 4 relevant (I-CVI = 0.75)
   ratings_three <- data.frame(
     item1 = c(4, 4, 4, 1)
   )
-  expect_equal(icvi(ratings_three)[1], 0.75)
+  expect_equal(unname(icvi(ratings_three)[1]), 0.75)
 })
 
 test_that("ua calculates correctly", {
@@ -107,25 +107,25 @@ test_that("cvr calculates Lawshe's formula correctly", {
   ratings_all <- data.frame(
     item1 = c(4, 4, 4, 4, 4)
   )
-  expect_equal(cvr(ratings_all)[1], 1.0)
+  expect_equal(unname(cvr(ratings_all)[1]), 1.0)
 
   # 5 experts, none say relevant: CVR = (0 - 2.5) / 2.5 = -1.0
   ratings_none <- data.frame(
     item1 = c(1, 1, 1, 1, 1)
   )
-  expect_equal(cvr(ratings_none)[1], -1.0)
+  expect_equal(unname(cvr(ratings_none)[1]), -1.0)
 
   # 6 experts, 3 say relevant: CVR = (3 - 3) / 3 = 0
   ratings_half <- data.frame(
     item1 = c(4, 4, 4, 1, 1, 1)
   )
-  expect_equal(cvr(ratings_half)[1], 0.0)
+  expect_equal(unname(cvr(ratings_half)[1]), 0.0)
 
   # 5 experts, 4 say relevant: CVR = (4 - 2.5) / 2.5 = 0.6
   ratings_four <- data.frame(
     item1 = c(4, 4, 4, 4, 1)
   )
-  expect_equal(cvr(ratings_four)[1], 0.6)
+  expect_equal(unname(cvr(ratings_four)[1]), 0.6)
 })
 
 test_that("cvr processes ALL items correctly", {
@@ -264,13 +264,13 @@ test_that("binary scale detection works", {
 })
 
 test_that("handles NA values appropriately", {
-  ratings_with_na <- data.frame(
+  local_na_ratings <- data.frame(
     item1 = c(4, 4, NA, 4),
     item2 = c(4, NA, 4, 4)
   )
 
   # Should calculate based on non-NA values
-  result <- icvi(ratings_with_na)
+  result <- icvi(local_na_ratings)
 
   expect_equal(result["item1"], c(item1 = 1.0))  # 3/3 non-NA are relevant
   expect_equal(result["item2"], c(item2 = 1.0))  # 3/3 non-NA are relevant
